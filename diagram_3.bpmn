@@ -4,171 +4,143 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1w0vk6y</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:subProcess id="handle-each-yard" name="handle each yard">
-      <bpmn:incoming>Flow_1w0vk6y</bpmn:incoming>
-      <bpmn:outgoing>Flow_0swr1al</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics isSequential="true" camunda:collection="${orgList.elements()}" camunda:elementVariable="orgId" />
-      <bpmn:startEvent id="Event_0lf1517">
-        <bpmn:outgoing>Flow_1lqdox7</bpmn:outgoing>
-      </bpmn:startEvent>
-      <bpmn:endEvent id="Event_1s3ije0">
-        <bpmn:incoming>Flow_1htaqpl</bpmn:incoming>
-      </bpmn:endEvent>
-      <bpmn:serviceTask id="get-not-synced-entities" name="get not synched entities" camunda:type="external" camunda:topic="GET_NOT_SYNCED_ENTITIES">
-        <bpmn:incoming>Flow_1lqdox7</bpmn:incoming>
-        <bpmn:outgoing>Flow_0uumtd3</bpmn:outgoing>
-      </bpmn:serviceTask>
-      <bpmn:sequenceFlow id="Flow_1lqdox7" sourceRef="Event_0lf1517" targetRef="get-not-synced-entities" />
-      <bpmn:sequenceFlow id="Flow_0uumtd3" sourceRef="get-not-synced-entities" targetRef="Activity_087acfa" />
-      <bpmn:sequenceFlow id="Flow_0hq7nax" sourceRef="Activity_087acfa" targetRef="Gateway_0uewozn" />
-      <bpmn:parallelGateway id="Gateway_0uewozn">
-        <bpmn:incoming>Flow_0hq7nax</bpmn:incoming>
-        <bpmn:outgoing>Flow_064b413</bpmn:outgoing>
-        <bpmn:outgoing>Flow_1nj1120</bpmn:outgoing>
-      </bpmn:parallelGateway>
-      <bpmn:sequenceFlow id="Flow_064b413" sourceRef="Gateway_0uewozn" targetRef="Activity_00aloxv" />
-      <bpmn:sequenceFlow id="Flow_1nj1120" sourceRef="Gateway_0uewozn" targetRef="Activity_17520kq" />
-      <bpmn:sequenceFlow id="Flow_18jb6s1" sourceRef="Activity_17520kq" targetRef="mark-as-synced" />
-      <bpmn:sequenceFlow id="Flow_0wvsp1t" sourceRef="Activity_00aloxv" targetRef="mark-as-synced" />
-      <bpmn:sequenceFlow id="Flow_1htaqpl" sourceRef="mark-as-synced" targetRef="Event_1s3ije0" />
-      <bpmn:serviceTask id="Activity_087acfa" name="retrieve Oauth creds for org&#39;s quickbooks" camunda:type="external" camunda:topic="SET_OAUTH_FOR_ORG">
-        <bpmn:incoming>Flow_0uumtd3</bpmn:incoming>
-        <bpmn:outgoing>Flow_0hq7nax</bpmn:outgoing>
-      </bpmn:serviceTask>
-      <bpmn:serviceTask id="Activity_00aloxv" name="push new customers" camunda:type="external" camunda:topic="PUSH_NEW_CUSTOMERS">
-        <bpmn:incoming>Flow_064b413</bpmn:incoming>
-        <bpmn:outgoing>Flow_0wvsp1t</bpmn:outgoing>
-      </bpmn:serviceTask>
-      <bpmn:serviceTask id="Activity_17520kq" name="push new invoices" camunda:type="external" camunda:topic="PUSH_NEW_INVOICES">
-        <bpmn:incoming>Flow_1nj1120</bpmn:incoming>
-        <bpmn:outgoing>Flow_18jb6s1</bpmn:outgoing>
-      </bpmn:serviceTask>
-      <bpmn:serviceTask id="mark-as-synced" name="mark synced entities as synced" camunda:type="external" camunda:topic="MARK_AS_SYNCED">
-        <bpmn:incoming>Flow_18jb6s1</bpmn:incoming>
-        <bpmn:incoming>Flow_0wvsp1t</bpmn:incoming>
-        <bpmn:outgoing>Flow_1htaqpl</bpmn:outgoing>
-      </bpmn:serviceTask>
-    </bpmn:subProcess>
-    <bpmn:sequenceFlow id="Flow_1w0vk6y" sourceRef="StartEvent_1" targetRef="handle-each-yard" />
+    <bpmn:sequenceFlow id="Flow_1w0vk6y" sourceRef="StartEvent_1" targetRef="Activity_0l9u4kw" />
     <bpmn:endEvent id="Event_0u31dye">
-      <bpmn:incoming>Flow_0swr1al</bpmn:incoming>
+      <bpmn:incoming>Flow_1fevo9a</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0swr1al" sourceRef="handle-each-yard" targetRef="Event_0u31dye" />
     <bpmn:startEvent id="message-start" name="message start">
-      <bpmn:outgoing>Flow_0lce6ff</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0nepmrk" messageRef="Message_1vp8xot" />
+      <bpmn:outgoing>Flow_0ss0uq5</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0nepmrk" messageRef="Message_01mxgck" />
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0lce6ff" sourceRef="message-start" targetRef="do-thing" />
-    <bpmn:endEvent id="Event_06f2cgf">
-      <bpmn:incoming>Flow_0oxxs76</bpmn:incoming>
+    <bpmn:serviceTask id="get-not-synced-entities" name="get not synched entities" camunda:type="external" camunda:topic="GET_NOT_SYNCED_ENTITIES">
+      <bpmn:incoming>Flow_0ss0uq5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pryvnd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_087acfa" name="retrieve Oauth creds for org&#39;s quickbooks" camunda:type="external" camunda:topic="SET_OAUTH_FOR_ORG">
+      <bpmn:incoming>Flow_0pryvnd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qomyqb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="Gateway_0uewozn">
+      <bpmn:incoming>Flow_0qomyqb</bpmn:incoming>
+      <bpmn:outgoing>Flow_064b413</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1nj1120</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:serviceTask id="Activity_00aloxv" name="push new customers" camunda:type="external" camunda:topic="PUSH_NEW_CUSTOMERS">
+      <bpmn:incoming>Flow_064b413</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wvsp1t</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_17520kq" name="push new invoices" camunda:type="external" camunda:topic="PUSH_NEW_INVOICES">
+      <bpmn:incoming>Flow_1nj1120</bpmn:incoming>
+      <bpmn:outgoing>Flow_18jb6s1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="mark-as-synced" name="mark synced entities as synced" camunda:type="external" camunda:topic="MARK_AS_SYNCED">
+      <bpmn:incoming>Flow_0wvsp1t</bpmn:incoming>
+      <bpmn:incoming>Flow_18jb6s1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hyx9fj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_064b413" sourceRef="Gateway_0uewozn" targetRef="Activity_00aloxv" />
+    <bpmn:sequenceFlow id="Flow_1nj1120" sourceRef="Gateway_0uewozn" targetRef="Activity_17520kq" />
+    <bpmn:sequenceFlow id="Flow_0wvsp1t" sourceRef="Activity_00aloxv" targetRef="mark-as-synced" />
+    <bpmn:sequenceFlow id="Flow_18jb6s1" sourceRef="Activity_17520kq" targetRef="mark-as-synced" />
+    <bpmn:sequenceFlow id="Flow_0ss0uq5" sourceRef="message-start" targetRef="get-not-synced-entities" />
+    <bpmn:sequenceFlow id="Flow_0pryvnd" sourceRef="get-not-synced-entities" targetRef="Activity_087acfa" />
+    <bpmn:sequenceFlow id="Flow_0qomyqb" sourceRef="Activity_087acfa" targetRef="Gateway_0uewozn" />
+    <bpmn:endEvent id="Event_1m97veu">
+      <bpmn:incoming>Flow_0hyx9fj</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0oxxs76" sourceRef="do-thing" targetRef="Event_06f2cgf" />
-    <bpmn:serviceTask id="do-thing" name="do thing" camunda:type="external" camunda:topic="DO_THING">
-      <bpmn:incoming>Flow_0lce6ff</bpmn:incoming>
-      <bpmn:outgoing>Flow_0oxxs76</bpmn:outgoing>
+    <bpmn:sequenceFlow id="Flow_0hyx9fj" sourceRef="mark-as-synced" targetRef="Event_1m97veu" />
+    <bpmn:sequenceFlow id="Flow_1fevo9a" sourceRef="Activity_0l9u4kw" targetRef="Event_0u31dye" />
+    <bpmn:serviceTask id="Activity_0l9u4kw" name="start process for each yard" camunda:type="external" camunda:topic="START_PROCESS_FOR_YARD">
+      <bpmn:incoming>Flow_1w0vk6y</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fevo9a</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" camunda:collection="${yardList.elements()}" camunda:elementVariable="yardId" />
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:message id="Message_1qpxbsj" />
   <bpmn:message id="Message_1jk4usn" />
-  <bpmn:message id="Message_1vp8xot" name="my-message" />
+  <bpmn:message id="Message_1vp8xot" />
+  <bpmn:message id="Message_01mxgck" name="SYNC_YARD_MSG" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="demo-process">
-      <bpmndi:BPMNEdge id="Flow_0swr1al_di" bpmnElement="Flow_0swr1al">
-        <di:waypoint x="1280" y="380" />
-        <di:waypoint x="1342" y="380" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1w0vk6y_di" bpmnElement="Flow_1w0vk6y">
-        <di:waypoint x="188" y="380" />
-        <di:waypoint x="300" y="380" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0lce6ff_di" bpmnElement="Flow_0lce6ff">
-        <di:waypoint x="588" y="910" />
-        <di:waypoint x="720" y="910" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0oxxs76_di" bpmnElement="Flow_0oxxs76">
-        <di:waypoint x="820" y="910" />
-        <di:waypoint x="1032" y="910" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="152" y="362" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_06f2cgf_di" bpmnElement="Event_06f2cgf">
-        <dc:Bounds x="1032" y="892" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0s8o38f_di" bpmnElement="do-thing">
-        <dc:Bounds x="720" y="870" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1l2ezqq_di" bpmnElement="message-start">
-        <dc:Bounds x="552" y="892" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="536" y="935" width="70" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_182qbht_di" bpmnElement="handle-each-yard" isExpanded="true">
-        <dc:Bounds x="300" y="80" width="980" height="620" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1lqdox7_di" bpmnElement="Flow_1lqdox7">
-        <di:waypoint x="378" y="380" />
-        <di:waypoint x="440" y="380" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0uumtd3_di" bpmnElement="Flow_0uumtd3">
-        <di:waypoint x="540" y="380" />
-        <di:waypoint x="600" y="380" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hq7nax_di" bpmnElement="Flow_0hq7nax">
-        <di:waypoint x="700" y="380" />
-        <di:waypoint x="735" y="380" />
+        <di:waypoint x="228" y="130" />
+        <di:waypoint x="360" y="130" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_064b413_di" bpmnElement="Flow_064b413">
-        <di:waypoint x="760" y="355" />
-        <di:waypoint x="760" y="300" />
-        <di:waypoint x="820" y="300" />
+        <di:waypoint x="680" y="355" />
+        <di:waypoint x="680" y="300" />
+        <di:waypoint x="740" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1nj1120_di" bpmnElement="Flow_1nj1120">
-        <di:waypoint x="760" y="405" />
-        <di:waypoint x="760" y="470" />
-        <di:waypoint x="820" y="470" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_18jb6s1_di" bpmnElement="Flow_18jb6s1">
-        <di:waypoint x="920" y="470" />
-        <di:waypoint x="1010" y="470" />
-        <di:waypoint x="1010" y="420" />
+        <di:waypoint x="680" y="405" />
+        <di:waypoint x="680" y="470" />
+        <di:waypoint x="740" y="470" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0wvsp1t_di" bpmnElement="Flow_0wvsp1t">
-        <di:waypoint x="920" y="300" />
-        <di:waypoint x="1010" y="300" />
-        <di:waypoint x="1010" y="340" />
+        <di:waypoint x="840" y="300" />
+        <di:waypoint x="930" y="300" />
+        <di:waypoint x="930" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1htaqpl_di" bpmnElement="Flow_1htaqpl">
-        <di:waypoint x="1060" y="380" />
-        <di:waypoint x="1202" y="380" />
+      <bpmndi:BPMNEdge id="Flow_18jb6s1_di" bpmnElement="Flow_18jb6s1">
+        <di:waypoint x="840" y="470" />
+        <di:waypoint x="930" y="470" />
+        <di:waypoint x="930" y="420" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0lf1517_di" bpmnElement="Event_0lf1517">
-        <dc:Bounds x="342" y="362" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1s3ije0_di" bpmnElement="Event_1s3ije0">
-        <dc:Bounds x="1202" y="362" width="36" height="36" />
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ss0uq5_di" bpmnElement="Flow_0ss0uq5">
+        <di:waypoint x="208" y="380" />
+        <di:waypoint x="290" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pryvnd_di" bpmnElement="Flow_0pryvnd">
+        <di:waypoint x="390" y="380" />
+        <di:waypoint x="450" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qomyqb_di" bpmnElement="Flow_0qomyqb">
+        <di:waypoint x="550" y="380" />
+        <di:waypoint x="655" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hyx9fj_di" bpmnElement="Flow_0hyx9fj">
+        <di:waypoint x="980" y="380" />
+        <di:waypoint x="1052" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fevo9a_di" bpmnElement="Flow_1fevo9a">
+        <di:waypoint x="460" y="130" />
+        <di:waypoint x="602" y="130" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_1ds14vu_di" bpmnElement="get-not-synced-entities">
-        <dc:Bounds x="440" y="340" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1ic24g5_di" bpmnElement="Gateway_0uewozn">
-        <dc:Bounds x="735" y="355" width="50" height="50" />
+        <dc:Bounds x="290" y="340" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0nngfgi_di" bpmnElement="Activity_087acfa">
-        <dc:Bounds x="600" y="340" width="100" height="80" />
+        <dc:Bounds x="450" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ic24g5_di" bpmnElement="Gateway_0uewozn">
+        <dc:Bounds x="655" y="355" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1kb3kea_di" bpmnElement="Activity_00aloxv">
-        <dc:Bounds x="820" y="260" width="100" height="80" />
+        <dc:Bounds x="740" y="260" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1a5w9rv_di" bpmnElement="Activity_17520kq">
-        <dc:Bounds x="820" y="430" width="100" height="80" />
+        <dc:Bounds x="740" y="430" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_18fyzre_di" bpmnElement="mark-as-synced">
-        <dc:Bounds x="960" y="340" width="100" height="80" />
+        <dc:Bounds x="880" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1l2ezqq_di" bpmnElement="message-start">
+        <dc:Bounds x="172" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="405" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1m97veu_di" bpmnElement="Event_1m97veu">
+        <dc:Bounds x="1052" y="362" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h35fy7_di" bpmnElement="Activity_0l9u4kw">
+        <dc:Bounds x="360" y="90" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0u31dye_di" bpmnElement="Event_0u31dye">
-        <dc:Bounds x="1342" y="362" width="36" height="36" />
+        <dc:Bounds x="602" y="112" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

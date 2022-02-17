@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/camunda-external-task-client-js": "^1.3.2",
+    "axios": "^0.26.0",
     "camunda-external-task-client-js": "^2.1.1"
   },
   "devDependencies": {
