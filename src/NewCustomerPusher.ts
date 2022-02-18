@@ -1,5 +1,5 @@
-import {Listener, TOPIC} from "./Interface";
-import {Client, HandlerArgs} from "camunda-external-task-client-js";
+import {Listener, TOPIC} from './Interface';
+import {Client, HandlerArgs} from 'camunda-external-task-client-js';
 
 
 export default class NewCustomerPusher implements Listener<TOPIC.PUSH_NEW_CUSTOMERS> {

@@ -1,5 +1,5 @@
-import type {Client, HandlerArgs} from "camunda-external-task-client-js";
-import {Listener, TOPIC} from "./Interface";
+import type {Client, HandlerArgs} from 'camunda-external-task-client-js';
+import {Listener, TOPIC} from './Interface';
 
 
 export default class OauthHelper implements Listener<TOPIC.SET_OAUTH_FOR_ORG> {
