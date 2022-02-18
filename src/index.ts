@@ -24,7 +24,6 @@ const newCustomerPusher = new NewCustomerPusher(TOPIC.PUSH_NEW_CUSTOMERS)
 const newInvoicePusher = new NewPurchasePusher(TOPIC.PUSH_NEW_PURCHASES)
 const syncStatusRecorder = new SyncStatusRecorder(TOPIC.MARK_AS_SYNCED)
 
-
 // set client listening on worker topics
 yardSyncTrigger.listen(client);
 setOauthHelper.listen(client);

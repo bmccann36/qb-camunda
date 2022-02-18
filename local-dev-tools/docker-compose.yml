@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+
+  camunda:
+    image: camunda/camunda-bpm-platform:latest
+    restart: always
+    container_name: camunda
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    # using volume mount to execute DDL script and seed the DB
+    # see https://stackoverflow.com/a/43975603/5874892 & https://hub.docker.com/_/postgres/
+    volumes:
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "3001:8080"
+
+
