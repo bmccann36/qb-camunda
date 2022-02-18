@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 if (process.env.IS_LOCAL) {
     const envFilePath = path.join(__dirname, '..', '.env')
     console.log('loading env vars from path: ', envFilePath)
-    dotenv.config({path: path.join(__dirname, '..', '.env')})
+    dotenv.config({path: envFilePath})
 }
 import {Client, logger} from 'camunda-external-task-client-js';
 import {TOPIC} from './Interface';

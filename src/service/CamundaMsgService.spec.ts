@@ -1,6 +1,5 @@
 process.env.CAMUNDA_ENGINE_ADDR = 'http://localhost:8080'
 import CamundaMsgService from './CamundaMsgService';
-
 let msgSvc: CamundaMsgService;
 
 

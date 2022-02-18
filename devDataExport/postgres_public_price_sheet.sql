@@ -1,0 +1,2 @@
+INSERT INTO public.price_sheet (id, yard_id, type, date, archive) VALUES ('c8617684-f1eb-4a9a-a741-9e510900954c', '00000000-0000-0000-0000-000000000000', 'DEFAULT', '54062-11-11 21:19:43.000000', false);
+INSERT INTO public.price_sheet (id, yard_id, type, date, archive) VALUES ('eb70adfd-4614-43a4-90a6-86aee789be69', '00000000-0000-0000-0000-000000000000', 'DEFAULT', '53948-12-01 09:24:00.000000', false);
