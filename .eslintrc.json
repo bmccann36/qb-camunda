@@ -20,6 +20,7 @@
       "warn",
       "single"
     ],
-    "quote-props": ["warn", "consistent-as-needed"]
+    "quote-props": ["warn", "consistent-as-needed"],
+    "semi": ["warn", "always"]
   }
 }

@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 dotenv.config()
-console.log(process.env.TYPEORM_ENTITIES)
 import {createConnection, Connection} from 'typeorm';
 
 
@@ -17,6 +16,6 @@ beforeAll(async () => {
 
 describe('#NewDataService', () => {
     it('gets new data to be synced from DB', async () => {
-        await target.getNewData()
+        await target.getNewData('00000000-0000-0000-0000-000000000000')
     })
 })
