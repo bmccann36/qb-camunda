@@ -7,8 +7,6 @@ const username: string = process.env.TYPEORM_USERNAME ? process.env.TYPEORM_USER
 const password: string = process.env.TYPEORM_PASSWORD ? process.env.TYPEORM_PASSWORD : 'example';
 
 export default function () {
-    console.log('creating new DB connection');
-    console.log(host);
     // entity path is resolved dynamically so ts-node or node can be used
     const entities = [
         `${__dirname}/entity/*.js`,
