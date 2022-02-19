@@ -1,7 +1,9 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "amd": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -20,7 +22,17 @@
       "warn",
       "single"
     ],
-    "quote-props": ["warn", "consistent-as-needed"],
-    "semi": ["warn", "always"]
+    "quote-props": [
+      "warn",
+      "consistent-as-needed"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ]
   }
 }

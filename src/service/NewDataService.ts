@@ -1,18 +1,25 @@
-import type {Connection} from 'typeorm';
-import {getRepository} from 'typeorm';
-import {InboundTicketEntity} from '../entity/InboundTicketEntity';
-
+import type { Connection } from 'typeorm';
+import { getRepository } from 'typeorm';
+import { InboundTicketEntity } from '../entity/InboundTicketEntity';
+import { NewData } from '../model/NewData';
 
 export default class NewDataService {
-
     constructor(private dbConn: Connection) {
     }
 
-    async getNewData(yardId: string) {
-        const ibtRepo = getRepository(InboundTicketEntity);
-        const res = await ibtRepo.find(
-            {where: {yardId: yardId}}
-        );
-        console.log(res.length);
+    async getNewData(yardId: string): Promise<NewData> {
+        const newIbts = await this.getNewIbts(yardId);
+
+        return {
+            inboundTickets: newIbts,
+        };
+    }
+
+    private async getNewIbts(yardId: string): Promise<InboundTicketEntity[]> {
+        return getRepository(InboundTicketEntity)
+            .createQueryBuilder('t')
+            .where({ yardId: yardId })
+            .select(['t.id', 't.externalId', 't.netCost', 't.customerId', 't.averageCostPerUnit'])
+            .getMany();
     }
 }

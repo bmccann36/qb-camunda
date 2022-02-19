@@ -1,5 +1,6 @@
 import type {Client, HandlerArgs} from 'camunda-external-task-client-js';
-import {Listener, TOPIC} from './Interface';
+import {Listener} from './model/ListenerInterface';
+import {TOPIC} from './model/enums';
 
 
 export default class SyncStatusRecorder implements Listener<TOPIC.MARK_AS_SYNCED> {
