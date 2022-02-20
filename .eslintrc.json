@@ -18,21 +18,11 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "quotes": [
-      "warn",
-      "single"
-    ],
-    "quote-props": [
-      "warn",
-      "consistent-as-needed"
-    ],
-    "semi": [
-      "warn",
-      "always"
-    ],
-    "object-curly-spacing": [
-      "warn",
-      "always"
-    ]
+    "quotes": ["warn", "single"],
+    "quote-props": ["warn", "consistent-as-needed"],
+    "semi": ["warn", "always"],
+    "object-curly-spacing": ["warn", "always"],
+    "indent": ["warn", 2],
+    "array-element-newline": ["warn", "never"]
   }
 }

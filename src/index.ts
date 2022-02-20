@@ -8,14 +8,16 @@ if (process.env.IS_LOCAL) {
 }
 import 'reflect-metadata';
 import { Client, logger } from 'camunda-external-task-client-js';
-import OauthHelper from './OauthHelper';
-import NewCustomerPusher from './NewCustomerPusher';
-import NewPurchasePusher from './NewPurchasePusher';
-import SyncStatusRecorder from './SyncStatusRecorder';
-import YardSyncTrigger from './YardSyncTrigger';
+
 import { TOPIC } from './model/enums';
-import NewDataFinder from './NewDataFinder';
+
 import initTypeOrm from './initTypeOrm';
+import YardSyncTrigger from './taskWorker/YardSyncTrigger';
+import SyncStatusRecorder from './taskWorker/SyncStatusRecorder';
+import NewDataFinder from './taskWorker/NewDataFinder';
+import OauthHelper from './taskWorker/OauthHelper';
+import NewPurchasePusher from './taskWorker/NewPurchasePusher';
+import NewCustomerPusher from './taskWorker/NewCustomerPusher';
 
 
 (async () => {

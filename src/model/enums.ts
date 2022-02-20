@@ -12,6 +12,9 @@ export enum TOPIC {
 export enum PROCESS_VAR {
     NEW_INBOUND_TICKETS = 'newInboundTickets'
 }
+export enum ERROR_CODE {
+    SYNC_FAIL_ERROR = 'SYNC_FAIL_ERROR'
+}
 
 export enum MSG {
     SYNC_YARD_MSG = 'SYNC_YARD_MSG'
