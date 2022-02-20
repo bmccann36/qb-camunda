@@ -21,7 +21,11 @@ import initTypeOrm from './initTypeOrm';
 (async () => {
     await initTypeOrm();
     // create a Client instance with custom configuration
-    const client = new Client({ baseUrl: `${process.env.CAMUNDA_ENGINE_ADDR}/engine-rest`, use: logger });
+    const client = new Client({
+        baseUrl: `${process.env.CAMUNDA_ENGINE_ADDR}/engine-rest`,
+        lockDuration: process.env.TASK_LOCK_DURATION ? +process.env.TASK_LOCK_DURATION : 5000,
+        use: logger
+    });
 // new up the listener classes
     const yardSyncTrigger = new YardSyncTrigger(TOPIC.START_PROCESS_FOR_YARD);
     const setOauthHelper = new OauthHelper(TOPIC.SET_OAUTH_FOR_ORG);

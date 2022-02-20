@@ -9,17 +9,17 @@ export default class NewDataService {
 
     async getNewData(yardId: string): Promise<NewData> {
         const newIbts = await this.getNewIbts(yardId);
-
         return {
             inboundTickets: newIbts,
         };
     }
 
     private async getNewIbts(yardId: string): Promise<InboundTicketEntity[]> {
-        return getRepository(InboundTicketEntity)
+        const ibtQuery = getRepository(InboundTicketEntity)
             .createQueryBuilder('t')
             .where({ yardId: yardId })
-            .select(['t.id', 't.externalId', 't.netCost', 't.customerId', 't.averageCostPerUnit'])
-            .getMany();
+            .select(['t.id', 't.externalId', 't.netCost', 't.customerId', 't.averageCostPerUnit']);
+
+        return ibtQuery.getMany();
     }
 }
