@@ -12,7 +12,7 @@ export default class NewCustomerPusher implements Listener<TOPIC.PUSH_NEW_CUSTOM
       const { task, taskService } = handlerArgs;
 
       // const newData = task.variables.get('newData')
-      // console.log(newData)
+      console.log('handling push customer, DOES NOTHING for now')
 
       await taskService.complete(task);
     });

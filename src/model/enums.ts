@@ -10,10 +10,14 @@ export enum TOPIC {
 // camunda rest api has unpredictable behavior with "_" character so these are named with camelCase
 export enum PROCESS_VAR {
   NEW_INBOUND_TICKETS = 'newInboundTickets',
-  INBOUND_TICKET = 'inboundTicket'
+  INBOUND_TICKET = 'inboundTicket',
+  SYNCED_ENTITIES = 'syncedEntities',
+  NOT_SYNCED_ENTITIES = 'notSyncedEntities',
+  FAILED_ENTITY = 'failedEntity',
+  ERROR_DETAILS = 'errorDetails'
 }
 
-export enum ERROR_CODE {
+export enum BPM_ERR_CODE {
   SYNC_FAIL_ERROR = 'SYNC_FAIL_ERROR',
   QB_COMMUNICATION_ERROR = 'QB_COMMUNICATION_ERROR'
 }
