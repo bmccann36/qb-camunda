@@ -69,9 +69,13 @@
   <bpmn:message id="Message_1jk4usn" />
   <bpmn:message id="Message_1vp8xot" />
   <bpmn:message id="Message_01mxgck" name="SYNC_YARD_MSG" />
-  <bpmn:error id="Error_0mor60d" name="SYNC_FAIL_ERROR" errorCode="SYNC_FAIL_ERROR" />
+  <bpmn:error id="Error_0mor60d" name="QB_COMMUNICATION_ERROR" errorCode="QB_COMMUNICATION_ERROR" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="quickbooks-sync">
+      <bpmndi:BPMNEdge id="Flow_0j011xr_di" bpmnElement="Flow_0j011xr">
+        <di:waypoint x="800" y="398" />
+        <di:waypoint x="800" y="460" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_064b413_di" bpmnElement="Flow_064b413">
         <di:waypoint x="640" y="225" />
         <di:waypoint x="640" y="170" />
@@ -85,6 +89,10 @@
       <bpmndi:BPMNEdge id="Flow_1yj9dzi_di" bpmnElement="Flow_1yj9dzi">
         <di:waypoint x="540" y="250" />
         <di:waypoint x="615" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fevo9a_di" bpmnElement="Flow_1fevo9a">
+        <di:waypoint x="350" y="120" />
+        <di:waypoint x="402" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0hyx9fj_di" bpmnElement="Flow_0hyx9fj">
         <di:waypoint x="940" y="250" />
@@ -108,18 +116,16 @@
         <di:waypoint x="640" y="340" />
         <di:waypoint x="700" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0j011xr_di" bpmnElement="Flow_0j011xr">
-        <di:waypoint x="800" y="398" />
-        <di:waypoint x="800" y="460" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1w0vk6y_di" bpmnElement="Flow_1w0vk6y">
         <di:waypoint x="188" y="120" />
         <di:waypoint x="250" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1fevo9a_di" bpmnElement="Flow_1fevo9a">
-        <di:waypoint x="350" y="120" />
-        <di:waypoint x="402" y="120" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0u31dye_di" bpmnElement="Event_0u31dye">
+        <dc:Bounds x="402" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1l2ezqq_di" bpmnElement="message-start">
         <dc:Bounds x="172" y="232" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -141,6 +147,9 @@
       <bpmndi:BPMNShape id="Event_1m97veu_di" bpmnElement="Event_1m97veu">
         <dc:Bounds x="992" y="232" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h35fy7_di" bpmnElement="Activity_0l9u4kw">
+        <dc:Bounds x="250" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_158vil9_di" bpmnElement="find-new-data">
         <dc:Bounds x="440" y="210" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -149,15 +158,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ingpfv_di" bpmnElement="report-entity-sync-fail">
         <dc:Bounds x="750" y="460" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="152" y="102" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0u31dye_di" bpmnElement="Event_0u31dye">
-        <dc:Bounds x="402" y="102" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1h35fy7_di" bpmnElement="Activity_0l9u4kw">
-        <dc:Bounds x="250" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_06b90dr_di" bpmnElement="sync-fail-event">
         <dc:Bounds x="782" y="362" width="36" height="36" />

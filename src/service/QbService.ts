@@ -3,14 +3,15 @@ import { InboundTicketEntity } from '../entity/InboundTicketEntity';
 
 export default class QbService {
 
-  async pushNewPurchase(ibt: InboundTicketEntity, qbCompanyId: string, authToken: string): Promise<AxiosResponse> {
+  async pushNewPurchase(ibt: InboundTicketEntity, qbCompanyId: string, authToken: string):
+    Promise<AxiosResponse> {
     const data = {
       PaymentType: 'Check',
       AccountRef: {
         name: 'Checking', //todo make dynamic
         value: '35'
       },
-      DocNumber: ibt.id,
+      DocNumber: ibt.externalId,
       PrivateNote: 'auto-synced by Greenspark application',
       Line: [
         {
