@@ -1,39 +1,102 @@
-{
-  "inboundTickets": [
-    {
-      "id": "00000000-0000-0000-0000-000000000000",
-      "errorDetails": {
-        "Fault": {
-          "Error": [
-            {
-              "Message": "Invalid Reference Id",
-              "Detail": "Invalid Reference Id : Accounts element id 35 not found",
-              "code": "2500",
-              "element": "Reference Id"
-            }
-          ],
-          "type": "ValidationFault"
-        },
-        "time": "2022-02-22T03:22:54.788-08:00"
+[
+  {
+    "failedEntity": {
+      "id": "40000000-0000-0000-0000-000000000000",
+      "externalId": 336,
+      "averageCostPerUnit": null,
+      "netCost": "0.0000",
+      "customerId": null
+    },
+    "errorDetails": {
+      "warnings": null,
+      "intuitObject": null,
+      "fault": {
+        "error": [
+          {
+            "message": "message=AuthenticationFailed; errorCode=003200; statusCode=401",
+            "detail": "Token expired: AB01645531898RY4BJY2SPYo7tdBa2YFHUdZ4NbZYPIBfLvOv2",
+            "code": "3200",
+            "element": null
+          }
+        ],
+        "type": "AUTHENTICATION"
       },
-      "errorMessage": "Request failed with status code 400"
-    }, {
-      "id": "10000000-0000-0000-0000-000000000000",
-      "errorDetails": {
-        "Fault": {
-          "Error": [
-            {
-              "Message": "Invalid Reference Id",
-              "Detail": "Invalid Reference Id : Accounts element id 35 not found",
-              "code": "2500",
-              "element": "Reference Id"
-            }
-          ],
-          "type": "ValidationFault"
-        },
-        "time": "2022-02-22T03:22:55.211-08:00"
-      },
-      "errorMessage": "Request failed with status code 400"
-    }
-  ]
+      "report": null,
+      "queryResponse": null,
+      "batchItemResponse": [],
+      "attachableResponse": [],
+      "syncErrorResponse": null,
+      "requestId": null,
+      "time": 1645538758836,
+      "status": null,
+      "cdcresponse": []
+    },
+    "errorMessage": "Request failed with status code 401"
+  }, {
+  "failedEntity": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "externalId": 334,
+    "averageCostPerUnit": null,
+    "netCost": "0.0000",
+    "customerId": null
+  },
+  "errorDetails": {
+    "warnings": null,
+    "intuitObject": null,
+    "fault": {
+      "error": [
+        {
+          "message": "message=AuthenticationFailed; errorCode=003200; statusCode=401",
+          "detail": "Token expired: AB01645531898RY4BJY2SPYo7tdBa2YFHUdZ4NbZYPIBfLvOv2",
+          "code": "3200",
+          "element": null
+        }
+      ],
+      "type": "AUTHENTICATION"
+    },
+    "report": null,
+    "queryResponse": null,
+    "batchItemResponse": [],
+    "attachableResponse": [],
+    "syncErrorResponse": null,
+    "requestId": null,
+    "time": 1645538762425,
+    "status": null,
+    "cdcresponse": []
+  },
+  "errorMessage": "Request failed with status code 401"
+}, {
+  "failedEntity": {
+    "id": "10000000-0000-0000-0000-000000000000",
+    "externalId": 335,
+    "averageCostPerUnit": null,
+    "netCost": "0.0000",
+    "customerId": null
+  },
+  "errorDetails": {
+    "warnings": null,
+    "intuitObject": null,
+    "fault": {
+      "error": [
+        {
+          "message": "message=AuthenticationFailed; errorCode=003200; statusCode=401",
+          "detail": "Token expired: AB01645531898RY4BJY2SPYo7tdBa2YFHUdZ4NbZYPIBfLvOv2",
+          "code": "3200",
+          "element": null
+        }
+      ],
+      "type": "AUTHENTICATION"
+    },
+    "report": null,
+    "queryResponse": null,
+    "batchItemResponse": [],
+    "attachableResponse": [],
+    "syncErrorResponse": null,
+    "requestId": null,
+    "time": 1645538764335,
+    "status": null,
+    "cdcresponse": []
+  },
+  "errorMessage": "Request failed with status code 401"
 }
+]

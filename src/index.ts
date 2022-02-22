@@ -8,9 +8,7 @@ if (process.env.IS_LOCAL) {
 }
 import 'reflect-metadata';
 import { Client, logger } from 'camunda-external-task-client-js';
-
 import { TOPIC } from './model/enums';
-
 import initTypeOrm from './initTypeOrm';
 import YardSyncTrigger from './taskWorker/YardSyncTrigger';
 import SyncStatusRecorder from './taskWorker/SyncStatusRecorder';
@@ -28,7 +26,7 @@ import NewCustomerPusher from './taskWorker/NewCustomerPusher';
     lockDuration: process.env.TASK_LOCK_DURATION ? +process.env.TASK_LOCK_DURATION : 5000,
     use: logger
   });
-// new up the listener classes
+  // new up the listener classes
   const yardSyncTrigger = new YardSyncTrigger(TOPIC.START_PROCESS_FOR_YARD);
   const setOauthHelper = new OauthHelper(TOPIC.SET_OAUTH_FOR_ORG);
   const newCustomerPusher = new NewCustomerPusher(TOPIC.PUSH_NEW_CUSTOMERS);
@@ -43,6 +41,11 @@ import NewCustomerPusher from './taskWorker/NewCustomerPusher';
   newCustomerPusher.listen(client);
   newInvoicePusher.listen(client);
   syncStatusRecorder.listen(client);
+
+  //! dummy topic for clearing out process executions
+  // client.subscribe('NOT_EXISTS', async function ({ task, taskService }) {
+  //   return taskService.complete(task);
+  // });
 
   console.log('CAMUNDA_ENGINE_ADDR is set to: ', process.env.CAMUNDA_ENGINE_ADDR);
 })();

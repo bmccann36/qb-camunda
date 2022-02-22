@@ -11,7 +11,9 @@ export enum TOPIC {
 export enum PROCESS_VAR {
   NEW_INBOUND_TICKETS = 'newInboundTickets',
   INBOUND_TICKET = 'inboundTicket',
-  SYNCED_ENTITIES = 'syncedEntities',
+  SYNCED_IBT_IDS = 'syncedIbtIds',
+  NOT_SYNCED_IBTS = 'notSyncedIBTs',
+  PROCESS_HAS_ERRORS = 'processHasErrors'
 }
 
 export enum BPM_ERR_CODE {

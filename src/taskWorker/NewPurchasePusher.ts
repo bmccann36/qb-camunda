@@ -2,9 +2,7 @@ import { Client, HandlerArgs, Variables } from 'camunda-external-task-client-js'
 import { Listener } from '../model/ListenerInterface';
 import { TOPIC, PROCESS_VAR } from '../model/enums';
 import QbService from '../service/QbService';
-import { AxiosResponse } from 'axios';
 import { InboundTicketEntity } from '../entity/InboundTicketEntity';
-import { SyncStatusMap } from '../model/SyncStatusMap';
 import SyncFailReporter from '../utility/SyncFailReporter';
 
 
@@ -26,34 +24,34 @@ export default class NewPurchasePusher implements Listener<TOPIC.PUSH_NEW_IBT> {
       console.log(`pushing ticket ${ibtToPush.id} as QB purchase`);
       console.log('current loop iter: ', task.variables.get('loopCounter'));
 
-      let qbPushRes: AxiosResponse<InboundTicketEntity>;
+
       try {
-        qbPushRes = await qbService.pushNewPurchase(
+        await qbService.pushNewPurchase(
           ibtToPush,
           <string>process.env.QB_TEST_COMPANY_ID, // todo fix hard coded QB company ID
           <string>process.env.QB_AUTH_TOKEN, // todo actually get token
         );
       } //? unhappy path
-      catch (e: any) {
-        if (e.isAxiosError) {
-          return failReporter.addSyncFailureToReport(
+      catch (syncIbtError: any) {
+        if (syncIbtError.isAxiosError) {
+          return failReporter.addSyncFailureToReport<InboundTicketEntity>(
             handlerArgs,
-            <never>ibtToPush.id,
-            e
+            ibtToPush,
+            PROCESS_VAR.NOT_SYNCED_IBTS,
+            syncIbtError
           );
         } // todo notify engine of failure if its an error but not axios
       }
       //? happy path
-      let syncedEntities: SyncStatusMap = task.variables.get(PROCESS_VAR.SYNCED_ENTITIES);
+      const updatedVars = new Variables();
+      const syncedIBTids: string[] = task.variables.get(PROCESS_VAR.SYNCED_IBT_IDS);
       // if syncedEntities is undefined create it
-      if (syncedEntities == undefined) {
-        syncedEntities = { inboundTickets: [] };
+      if (syncedIBTids == undefined) {
+        updatedVars.set(PROCESS_VAR.SYNCED_IBT_IDS, [ibtToPush.id]);
+      } else { // push to array if exists
+        const newSuccessReport = syncedIBTids.push(<any>ibtToPush.id);
+        updatedVars.set(PROCESS_VAR.SYNCED_IBT_IDS, newSuccessReport);
       }
-      // record that this entity was synced successfully
-      if (ibtToPush.id != null) {
-        syncedEntities.inboundTickets.push(ibtToPush.id);
-      }
-      const updatedVars = new Variables().set(PROCESS_VAR.SYNCED_ENTITIES, syncedEntities);
       await taskService.complete(task, updatedVars);
     });
   }
