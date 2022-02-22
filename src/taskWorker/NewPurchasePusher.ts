@@ -30,8 +30,8 @@ export default class NewPurchasePusher implements Listener<TOPIC.PUSH_NEW_IBT> {
       try {
         qbPushRes = await qbService.pushNewPurchase(
           ibtToPush,
-          '4625319964620848278', // todo fix hard coded QB company ID
-          <any>process.env.QB_AUTH_TOKEN, // todo actually get token
+          <string>process.env.QB_TEST_COMPANY_ID, // todo fix hard coded QB company ID
+          <string>process.env.QB_AUTH_TOKEN, // todo actually get token
         );
       } //? unhappy path
       catch (e: any) {
