@@ -1,0 +1,51 @@
+<form role="form" class="form-horizontal">
+
+    <script cam-script type="application/javascript">
+
+    $scope.genders = [ 'female', 'male' ];
+    camForm.on('form-loaded', function() {
+      // tell the form SDK to fetch the variable named 'customer'
+      camForm.variableManager.fetchVariable('myArray');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // work with the variable (bind it to the current AngularJS $scope)
+      $scope.myArray = camForm.variableManager.variableValue('myArray');
+    });
+
+    camForm.on('submit', function (evt) {
+
+    console.log('$scope is', $scope)
+
+        camForm.variableManager.createVariable({
+          name: 'selectedValue',
+          type: 'String',
+          value: $scope.selectedValue
+        });
+    });
+
+
+    </script>
+
+
+    <div class="control-group">
+        <label class="control-label" for="arrayElement">select from my array</label>
+        <div class="controls">
+            <select id="arrayElement" ng-model="selectedValue" >
+                <option ng-repeat="arrayElement in myArray" ng-value="arrayElement">{{arrayElement}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="gender">Gender</label>
+        <div class="controls">
+            <select id="gender" ng-model="customer.gender">
+                <option ng-repeat="gender in genders" ng-value="gender">{{gender}}</option>
+            </select>
+        </div>
+    </div>
+
+
+</form>
+

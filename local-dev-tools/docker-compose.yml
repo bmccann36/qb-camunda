@@ -7,6 +7,9 @@ services:
     container_name: camunda
     ports:
       - "8080:8080"
+#    volumes:
+#      - ./scripts/myscript.js:/camunda/lib/myscript.js
+
 
   db:
     image: postgres
