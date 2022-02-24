@@ -1,3 +1,5 @@
+import { InboundTicketEntity } from '../entity/InboundTicketEntity';
+
 export enum TOPIC {
   FIND_NEW_DATA = 'FIND_NEW_DATA',
   SET_OAUTH_FOR_ORG = 'SET_OAUTH_FOR_ORG',
@@ -9,11 +11,20 @@ export enum TOPIC {
 
 // camunda rest api has unpredictable behavior with "_" character so these are named with camelCase
 export enum PROCESS_VAR {
+  YARD_ID = 'yardId',
   NEW_INBOUND_TICKETS = 'newInboundTickets',
   INBOUND_TICKET = 'inboundTicket',
   SYNCED_IBT_IDS = 'syncedIbtIds',
   NOT_SYNCED_IBTS = 'notSyncedIBTs',
   PROCESS_HAS_ERRORS = 'processHasErrors'
+}
+
+export interface QBProccessVars {
+  newInboundTickets: InboundTicketEntity[],
+  inboundTicket: InboundTicketEntity,
+  syncedIbtIds: string[],
+  notSyncedIbts: InboundTicketEntity[],
+  processHasErrors: boolean
 }
 
 export enum BPM_ERR_CODE {
