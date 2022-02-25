@@ -29,7 +29,7 @@ beforeAll(async () => {
 });
 
 describe('#OauthHelper', () => {
-  it('retrieves an existing yard token', async () => {
+  it('gets, updates, sets token', async () => {
     const mockGetVariable = jest.fn((varName: string) => {
       if (varName == 'yardId') return '00000000-0000-0000-0000-000000000000';
     });
@@ -43,6 +43,8 @@ describe('#OauthHelper', () => {
     target.listen(mockedClient);
     // simulate a message coming in from process engine
     await (mockedClient as any).simulateMessage(handlerArgs as any);
+
+
     // const firstCall = mockGetVariable.mock.calls[0]
     // console.log(firstCall);
 

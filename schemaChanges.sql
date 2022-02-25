@@ -1,6 +1,4 @@
-
-
-CREATE TYPE sync_status  AS ENUM ('completed_by_system', 'failed', 'completed_by_user');
+CREATE TYPE sync_status AS ENUM ('completed_by_system', 'failed', 'completed_by_user');
 
 alter table inbound_ticket
     add created_at timestamp;
@@ -14,7 +12,7 @@ CREATE TABLE erp_tool_credentials
 (
     id                         uuid      not null
         constraint erp_pkey primary key,
-    qb_company_id              char(40),
+    qb_company_id              text      not null,
     token_type                 text,
     access_token               text,
     refresh_token              text,

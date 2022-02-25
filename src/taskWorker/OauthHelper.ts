@@ -5,6 +5,7 @@ import AuthTokenService from '../service/AuthTokenService';
 import NewDataService from '../service/NewDataService';
 import { getConnection } from 'typeorm';
 import { ErpToolCredsEntity } from '../entity/ErpToolCredsEntity';
+import { Variables } from 'camunda-external-task-client-js';
 
 
 export default class OauthHelper implements Listener<TOPIC.SET_OAUTH_FOR_ORG> {
@@ -18,14 +19,15 @@ export default class OauthHelper implements Listener<TOPIC.SET_OAUTH_FOR_ORG> {
     client.subscribe(this.topic, async function (handlerArgs: HandlerArgs) {
       const { task, taskService } = handlerArgs;
 
+      console.log('refreshing auth token and attaching to process');
       const yardId = task.variables.get(PROCESS_VAR.YARD_ID);
-      // get auth token from DB
-      const qbPreviousAuthToken: ErpToolCredsEntity | undefined =
-        await tokenSvc.getQbTokenForYard(yardId);
-      console.log(qbPreviousAuthToken);
+      // refresh token and get latest
+      const accessTknForYrd = await tokenSvc.updateToken(yardId);
 
-
-      await taskService.complete(task);
+      // set yard access token object ob as process variable
+      const accessTokenVar = new Variables()
+        .set(PROCESS_VAR.QB_CREDENTIALS, accessTknForYrd);
+      await taskService.complete(task, accessTokenVar);
     });
   }
 

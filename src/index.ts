@@ -40,7 +40,8 @@ import NewCustomerPusher from './taskWorker/NewCustomerPusher';
   newDataFinder.listen(client);
   newCustomerPusher.listen(client);
   newInvoicePusher.listen(client);
-  syncStatusRecorder.listen(client);
+
+  // syncStatusRecorder.listen(client);
 
   //! dummy topic for clearing out process executions
   // client.subscribe('NOT_EXISTS', async function ({ task, taskService }) {

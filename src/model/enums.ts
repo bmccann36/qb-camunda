@@ -12,6 +12,7 @@ export enum TOPIC {
 // camunda rest api has unpredictable behavior with "_" character so these are named with camelCase
 export enum PROCESS_VAR {
   YARD_ID = 'yardId',
+  QB_CREDENTIALS = 'qbCredentials',
   NEW_INBOUND_TICKETS = 'newInboundTickets',
   INBOUND_TICKET = 'inboundTicket',
   SYNCED_IBT_IDS = 'syncedIbtIds',
